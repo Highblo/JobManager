@@ -1,12 +1,27 @@
 package com.haru.job_manager.entity;
 
+import jakarta.persistence.Entity;
+
+import jakarta.persistence.Id;
+
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+
+@Entity
+@Table(name="JOB")
 public class Job {
 
+    @Id
     private Long id;
 
+    @Column(name="JOB_NAME")
     private String jobName;
 
     private String status;
+
+    public Job() {
+
+    }
 
     public Job(Long id, String jobName, String status) {
         this.id = id;
