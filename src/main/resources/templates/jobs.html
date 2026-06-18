@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ジョブ一覧</title>
+</head>
+<body>
+    <h1>ジョブ一覧</h1>
+
+    <table border="1">
+        <tr th:each="job : ${jobs}">
+            <td th:text="${job.id}"></td>
+            <td th:text="${job.jobName}"></td>
+            <td th:text="${job.status}"></td>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>外貨預金取引明細表</td>
+            <td>正常終了</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>流動性集計</td>
+            <td>実行中</td>
+        </tr>
+    </table>
+</body>
+</html>
