@@ -14,87 +14,55 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class HelloController {
 
-    @Autowired
-    private JobService jobService;
+        @Autowired
+        private JobService jobService;
 
-    @GetMapping("/jobs")
-    public String jobs(Model model) {
+        @GetMapping("/jobs")
+        public String jobs(Model model) {
+                        model.addAttribute("jobs",jobService.getJobs());
+                        return "jobs";
+        }
 
-        model.addAttribute(
-                "jobs",
-                jobService.getJobs());
+        @PostMapping("/jobs")
+        public String addJob(
+                        @RequestParam String jobName,
+                        @RequestParam String status) {
 
-        return "jobs";
+                        jobService.saveJob(jobName,status);
+                        return "redirect:/jobs";
+        }
 
-    }
+        @PostMapping("/jobs/delete/{id}")
+        public String deleteJob(
+                        @PathVariable Long id) {
+                        jobService.deleteJob(id);
+                        return "redirect:/jobs";
+        }
 
-    @PostMapping("/jobs")
-    public String addJob(
+        @GetMapping("/jobs/edit/{id}")
+        public String editJob(
+                        @PathVariable Long id, Model model) {
+                        Job job = jobService.getJob(id);
 
-            @RequestParam String jobName,
+                        model.addAttribute("job", job);
+                        return "edit";
 
-            @RequestParam String status) {
+        }
 
-        jobService.saveJob(
+        @PostMapping("/jobs/update")
+        public String updateJob(
+                        @RequestParam Long id,
+                        @RequestParam String jobName,
+                        @RequestParam String status) {
+                        jobService.updateJob(id, jobName, status);
+                        return "redirect:/jobs";
 
-                jobName,
+        }
 
-                status);
+        @GetMapping("/jobs/search")
+        public String search(@RequestParam String keyword, Model model) {
+                model.addAttribute("jobs", jobService.searchJobs(keyword));
+                return "jobs";
 
-        return "redirect:/jobs";
-
-    }
-
-    @PostMapping("/jobs/delete/{id}")
-    public String deleteJob(
-
-            @PathVariable Long id) {
-
-        jobService.deleteJob(id);
-
-        return "redirect:/jobs";
-
-    }
-
-    @GetMapping("/jobs/edit/{id}")
-    public String editJob(
-
-            @PathVariable Long id,
-
-            Model model) {
-
-        Job job =
-
-                jobService.getJob(id);
-
-        model.addAttribute(
-
-                "job",
-
-                job);
-
-        return "edit";
-
-    }
-
-    @PostMapping("/jobs/update")
-    public String updateJob(
-
-            @RequestParam Long id,
-
-            @RequestParam String jobName,
-
-            @RequestParam String status) {
-
-        jobService.updateJob(
-
-                id,
-
-                jobName,
-
-                status);
-
-        return "redirect:/jobs";
-
-    }
+        }
 }

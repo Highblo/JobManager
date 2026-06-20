@@ -22,6 +22,12 @@ public class JobService {
 
     }
 
+    public List<Job> searchJobs(String keyword) {
+
+        return jobRepository.findByJobNameContainingOrderByIdAsc(keyword);
+
+    }
+
     public void saveJob(
             String jobName,
             String status) {

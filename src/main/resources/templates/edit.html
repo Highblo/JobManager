@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>ジョブ編集</title>
 </head>
-<body>
-    <h1>ジョブ編集</h1>
-    <form th:action="@{/jobs/update}" method="post">
-        <input type="hidden" name="id" th:value="${job.id}">
-        <label>ID</label>
-        <span th:text="${job.id}"></span>
-        <br><br>
-        <label>ジョブ名</label>
-        <input type="text" name="jobName" th:value="${job.jobName}">
-        <br><br>
-        <label>ステータス</label>
-        <select name="status">
-            <option value="正常終了" th:selected="${job.status == '正常終了'}">
 
-                正常終了
+<body style="background-color:#f5f7fa;">
+    <div class="container mt-5">
+        <div class="card shadow p-5 mx-auto" style="max-width: 600px;">
+            <h1 class="mb-4">ジョブ編集</h1>
+            <p class="text-muted">ジョブ情報を編集します</p>
+            <form th:action="@{/jobs/update}" method="post">
+                <div class="mb-5">
+                    <label class="form-label">ID</label>
+                    <input type="hidden" name="id" th:value="${job.id}" class="form-control">
+                    <input type="text" name="id" th:value="${job.id}" class="form-control" disabled>
+                </div>
+                <div class="mb-5">
+                    <label class="form-label">ジョブ名</label>
+                    <input type="text" name="jobName" th:value="${job.jobName}" class="form-control">
+                </div>
+                <div class="mb-5">
+                    <label class="form-label">ステータス</label>
+                    <select name="status" class="form-select">
+                        <option value="正常終了" th:selected="${job.status == '正常終了'}">
 
-            </option>
-            <option value="実行中" th:selected="${job.status == '実行中'}">
+                            正常終了
 
-                実行中
+                        </option>
+                        <option value="実行中" th:selected="${job.status == '実行中'}">
 
-            </option>
-            <option value="異常終了" th:selected="${job.status == '異常終了'}">
+                            実行中
 
-                異常終了
+                        </option>
+                        <option value="異常終了" th:selected="${job.status == '異常終了'}">
 
-            </option>
-        </select>
-        <br><br>
-        <button type="submit">
+                            異常終了
 
-            更新
-
-        </button>
-    </form>
-    <br>
-    <a th:href="@{/jobs}">
-
-        一覧へ戻る
-
-    </a>
+                        </option>
+                    </select>
+                </div>
+                <div class="d-flex gap-2 justify-content-end">
+                    <button type="submit" class="btn btn-primary">更新</button>
+                    <a th:href="@{/jobs}" class="btn btn-secondary">一覧へ戻る</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
