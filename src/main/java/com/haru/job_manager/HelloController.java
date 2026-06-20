@@ -6,9 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.haru.job_manager.service.JobService;
-
+import com.haru.job_manager.entity.Job;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class HelloController {
@@ -44,4 +45,56 @@ public class HelloController {
 
     }
 
+    @PostMapping("/jobs/delete/{id}")
+    public String deleteJob(
+
+            @PathVariable Long id) {
+
+        jobService.deleteJob(id);
+
+        return "redirect:/jobs";
+
+    }
+
+    @GetMapping("/jobs/edit/{id}")
+    public String editJob(
+
+            @PathVariable Long id,
+
+            Model model) {
+
+        Job job =
+
+                jobService.getJob(id);
+
+        model.addAttribute(
+
+                "job",
+
+                job);
+
+        return "edit";
+
+    }
+
+    @PostMapping("/jobs/update")
+    public String updateJob(
+
+            @RequestParam Long id,
+
+            @RequestParam String jobName,
+
+            @RequestParam String status) {
+
+        jobService.updateJob(
+
+                id,
+
+                jobName,
+
+                status);
+
+        return "redirect:/jobs";
+
+    }
 }

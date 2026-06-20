@@ -32,4 +32,39 @@ public class JobService {
 
     }
 
+    public void deleteJob(Long id) {
+
+        jobRepository.deleteById(id);
+
+    }
+
+    public Job getJob(Long id) {
+
+        return jobRepository
+                .findById(id)
+                .orElse(null);
+
+    }
+
+    public void updateJob(
+
+            Long id,
+
+            String jobName,
+
+            String status) {
+
+        Job job =
+
+                new Job(
+
+                        id,
+
+                        jobName,
+
+                        status);
+
+        jobRepository.save(job);
+
+    }
 }

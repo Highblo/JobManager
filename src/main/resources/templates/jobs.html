@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ジョブ一覧</title>
 </head>
+
 <body>
     <h1>ジョブ一覧</h1>
     <form th:action="@{/jobs}" method="post">
@@ -19,10 +20,22 @@
     </form>
     <br>
     <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>ジョブ名</th>
+            <th>ステータス</th>
+            <th>操作</th>
+        </tr>
         <tr th:each="job : ${jobs}">
             <td th:text="${job.id}"></td>
             <td th:text="${job.jobName}"></td>
             <td th:text="${job.status}"></td>
+            <td>
+                <a th:href="@{/jobs/edit/{id}(id=${job.id})}">編集</a>
+                <form th:action="@{/jobs/delete/{id}(id=${job.id})}" method="post" style="display:inline;">
+                    <button type="submit">削除</button>
+                </form>
+            </td>
         </tr>
     </table>
 </body>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ジョブ編集</title>
+</head>
+<body>
+    <h1>ジョブ編集</h1>
+    <form th:action="@{/jobs/update}" method="post">
+        <input type="hidden" name="id" th:value="${job.id}">
+        <label>ID</label>
+        <span th:text="${job.id}"></span>
+        <br><br>
+        <label>ジョブ名</label>
+        <input type="text" name="jobName" th:value="${job.jobName}">
+        <br><br>
+        <label>ステータス</label>
+        <select name="status">
+            <option value="正常終了" th:selected="${job.status == '正常終了'}">
+
+                正常終了
+
+            </option>
+            <option value="実行中" th:selected="${job.status == '実行中'}">
+
+                実行中
+
+            </option>
+            <option value="異常終了" th:selected="${job.status == '異常終了'}">
+
+                異常終了
+
+            </option>
+        </select>
+        <br><br>
+        <button type="submit">
+
+            更新
+
+        </button>
+    </form>
+    <br>
+    <a th:href="@{/jobs}">
+
+        一覧へ戻る
+
+    </a>
+</body>
+</html>
