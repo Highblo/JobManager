@@ -18,7 +18,7 @@ public class JobService {
 
     public List<Job> getJobs() {
 
-        return jobRepository.findAll();
+        return jobRepository.findAllByOrderByIdAsc();
 
     }
 
