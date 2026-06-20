@@ -6,7 +6,18 @@
 </head>
 <body>
     <h1>ジョブ一覧</h1>
-
+    <form th:action="@{/jobs}" method="post">
+        <label>ジョブ名</label>
+        <input type="text" name="jobName">
+        <label>ステータス</label>
+        <select name="status">
+            <option value="正常終了">正常終了</option>
+            <option value="実行中">実行中</option>
+            <option value="異常終了">異常終了</option>
+        </select>
+        <button type="submit">登録</button>
+    </form>
+    <br>
     <table border="1">
         <tr th:each="job : ${jobs}">
             <td th:text="${job.id}"></td>

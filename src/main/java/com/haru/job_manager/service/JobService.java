@@ -22,4 +22,14 @@ public class JobService {
 
     }
 
+    public void saveJob(
+            String jobName,
+            String status) {
+
+        Job job = new Job(null, jobName, status);
+
+        jobRepository.save(job);
+
+    }
+
 }

@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.haru.job_manager.service.JobService;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 @Controller
 public class HelloController {
 
@@ -21,6 +24,23 @@ public class HelloController {
                 jobService.getJobs());
 
         return "jobs";
+
+    }
+
+    @PostMapping("/jobs")
+    public String addJob(
+
+            @RequestParam String jobName,
+
+            @RequestParam String status) {
+
+        jobService.saveJob(
+
+                jobName,
+
+                status);
+
+        return "redirect:/jobs";
 
     }
 

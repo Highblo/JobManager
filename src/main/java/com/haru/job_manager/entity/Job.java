@@ -7,14 +7,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.SequenceGenerator;
+
 @Entity
-@Table(name="JOB")
+@Table(name = "JOB")
 public class Job {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "job_seq")
+    @SequenceGenerator(name = "job_seq", sequenceName = "JOB_SEQ", allocationSize = 1)
     private Long id;
 
-    @Column(name="JOB_NAME")
+    @Column(name = "JOB_NAME")
     private String jobName;
 
     private String status;
